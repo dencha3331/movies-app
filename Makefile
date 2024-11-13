@@ -1,22 +1,21 @@
 DC = docker compose
 EXEC = docker exec -it
 LOGS = docker logs
-ENV = --env-file .env
 APP_FILE = docker_compose/app.yaml
 POSTGRES_FILE = docker_compose/postgresql.yaml
 APP_CONTAINER = kinopoisk-app
 
 .PHONY: app
 app:
-	${DC} -f ${APP_FILE} ${ENV} up --build -d
+	${DC} -f ${APP_FILE} up --build -d
 
 .PHONY: postgres
 postgres:
-	${DC} -f ${POSTGRES_FILE} ${ENV} up --build -d
+	${DC} -f ${POSTGRES_FILE} up --build -d
 
 .PHONY: all
 all:
-	${DC} -f ${POSTGRES_FILE} -f ${APP_FILE} ${ENV} up --build -d
+	${DC} -f ${POSTGRES_FILE} -f ${APP_FILE} up --build -d
 
 .PHONY: app-down
 app-down:
