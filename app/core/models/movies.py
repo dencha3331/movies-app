@@ -24,7 +24,7 @@ class FavoriteMovie(Base, IntIdPkMixin):
     user_id: Mapped[int] = mapped_column(
         ForeignKey(
             "user.id",
-            ondelete="all, delete-orphan",
+            ondelete="cascade",
         )
     )
 

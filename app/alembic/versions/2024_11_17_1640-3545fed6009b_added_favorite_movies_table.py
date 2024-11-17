@@ -1,8 +1,8 @@
 """Added favorite_movies table
 
-Revision ID: b9557b7f8213
+Revision ID: 3545fed6009b
 Revises: 01d7d44cdd44
-Create Date: 2024-11-17 16:01:23.720496
+Create Date: 2024-11-17 16:40:01.848619
 
 """
 
@@ -13,7 +13,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "b9557b7f8213"
+revision: str = "3545fed6009b"
 down_revision: Union[str, None] = "01d7d44cdd44"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -29,7 +29,7 @@ def upgrade() -> None:
             ["user_id"],
             ["user.id"],
             name=op.f("fk_favorite_movies_user_id_user"),
-            ondelete="all, delete-orphan",
+            ondelete="cascade",
         ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_favorite_movies")),
         sa.UniqueConstraint(
