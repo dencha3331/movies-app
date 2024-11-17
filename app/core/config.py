@@ -63,7 +63,7 @@ class AuthJWT(BaseModel):
 
 
 class Kinopoisk(BaseModel):
-    api_key: str = ""
+    api_key: str
 
 
 class Settings(BaseSettings):
@@ -76,8 +76,8 @@ class Settings(BaseSettings):
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
     db: DatabaseConfig
-    auth: AuthJWT = AuthJWT()
-    kinopoisk: Kinopoisk = Kinopoisk()
+    auth: AuthJWT
+    kinopoisk: Kinopoisk
 
 
 settings = Settings()
