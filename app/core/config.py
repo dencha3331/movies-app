@@ -28,10 +28,8 @@ class ApiPrefix(BaseModel):
 
     @property
     def bearer_token_url(self) -> str:
-        # api/v1/auth/login
         parts = (self.prefix, self.v1.prefix, self.v1.auth, "/login")
         path = "".join(parts)
-        # return path[1:]
         return path.removeprefix("/")
 
 
@@ -52,9 +50,11 @@ class DatabaseConfig(BaseModel):
 
 
 class AuthJWT(BaseModel):
-    private_key_path: Path = BASE_DIR / "certs" / "private.pem"
-    public_key_path: Path = BASE_DIR / "certs" / "public.pem"
-    algorithm: str = "RS256"
+    # private_key_path: Path = BASE_DIR / "certs" / "private.pem"
+    # public_key_path: Path = BASE_DIR / "certs" / "public.pem"
+    # algorithm: str = "RS256"
+    secret_key: str
+    algorithm: str = "HS256"
     access_token_expire_minutes: int = 15
     refresh_token_expire_days: int = 30
     lifetime_seconds: int = 3600
@@ -68,10 +68,11 @@ class Kinopoisk(BaseModel):
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=(".env.template", ".env"),
+        env_file=("../.env.template", "../.env", ".env.template", ".env"),
         case_sensitive=False,
         env_nested_delimiter="__",
         env_prefix="APP_CONFIG__",
+        extra="ignore",
     )
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
