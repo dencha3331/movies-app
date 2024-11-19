@@ -8,7 +8,8 @@ WORKDIR /app
 RUN apt update -y && \
     apt install -y python3-dev \
     gcc \
-    musl-dev
+    musl-dev \
+    openssl
 
 ADD pyproject.toml /app
 
@@ -19,3 +20,5 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --no-root --no-interaction --no-ansi
 
 COPY /app/* /app/
+
+RUN alembic upgrade head
